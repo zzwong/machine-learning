@@ -3,8 +3,14 @@
 Table of Contents
 -----------------
 
+- [Courses](#courses)
 - [Resources](#resources)
 - [Data Sets](#data-sets)
+
+
+Courses
+-------
+- [Coursera ML taught by Andrew Ng, Stanford](https://www.coursera.org/learn/machine-learning)
 
 Resources
 ---------
@@ -19,3 +25,4 @@ Data Sets
 - [Amazon Product Data Sets](http://jmcauley.ucsd.edu/data/amazon/)
   - [Amazon Question/Answer](http://jmcauley.ucsd.edu/data/amazon/qa/)
 - [Stanford Large Network Dataset Collection](https://snap.stanford.edu/data/)
+- [Million Song Dataset, Echonest](http://labrosa.ee.columbia.edu/millionsong/)
