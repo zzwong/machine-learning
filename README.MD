@@ -18,3 +18,4 @@ Data Sets
 ---------
 - [Amazon Product Data Sets](http://jmcauley.ucsd.edu/data/amazon/)
   - [Amazon Question/Answer](http://jmcauley.ucsd.edu/data/amazon/qa/)
+- [Stanford Large Network Dataset Collection](https://snap.stanford.edu/data/)
