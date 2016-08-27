@@ -17,3 +17,4 @@ Recommendation](https://bmcfee.github.io/papers/simopt.pdfi)
 Data Sets
 ---------
 - [Amazon Product Data Sets](http://jmcauley.ucsd.edu/data/amazon/)
+  - [Amazon Question/Answer](http://jmcauley.ucsd.edu/data/amazon/qa/)
