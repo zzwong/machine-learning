@@ -10,10 +10,14 @@ Table of Contents
 
 Courses
 -------
-- [Coursera ML taught by Andrew Ng, Stanford](https://www.coursera.org/learn/machine-learning)
+- [Coursera: Machine Learning](https://www.coursera.org/learn/machine-learning) taught by Andrew Ng, Stanford
+- [Coursera: Intro to Recommender Systems](https://www.coursera.org/learn/recommender-systems) taught by Joseph A Konstan, University of Minnesota
 
 Resources
 ---------
+### Text
+- [Mining of Massive Datasets](http://www.mmds.org/) by Jure Leskovec, Anand Rajaraman, Jeff Ullman from Stanford University [pdf](http://infolab.stanford.edu/~ullman/mmds/book.pdf)
+
 ### Papers
 - [Learning Content Similarity for Music
 Recommendation](https://bmcfee.github.io/papers/simopt.pdfi)
