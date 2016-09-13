@@ -10,6 +10,8 @@ Table of Contents
 
 Courses
 -------
+- [Stanford: Convolutional Neural Networks for Visual Recognition](http://cs231n.stanford.edu/)
+  - [notes](http://cs231n.github.io/)
 - [Coursera: Machine Learning](https://www.coursera.org/learn/machine-learning) taught by Andrew Ng, Stanford
 - [Coursera: Intro to Recommender Systems](https://www.coursera.org/learn/recommender-systems) taught by Joseph A Konstan, University of Minnesota
 
