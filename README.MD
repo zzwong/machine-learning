@@ -1,5 +1,7 @@
 # Machine Learning
 
+[Fizz Buzz w/ TensorFlow](http://joelgrus.com/2016/05/23/fizz-buzz-in-tensorflow/)
+
 Table of Contents
 -----------------
 
