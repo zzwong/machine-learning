@@ -29,6 +29,7 @@ Recommendation](https://bmcfee.github.io/papers/simopt.pdfi)
 - [A Survey of Music Recommender Systems and Future Perspectives](https://www.eecs.qmul.ac.uk/~simond/pub/2012/Song-Dixon-Pearce-CMMR-2012.pdf)
 - [BellKor Solution to the Netfliz Grand Prize](http://netflixprize.com/assets/GrandPrize2009_BPC_BellKor.pdf)
 - [Detecting Sarcasm in Text](http://cs229.stanford.edu/proj2015/044_report.pdf)
+- [Improving Visualization of High-Dimensional Music Similarity Spaces](http://ismir2015.uma.es/articles/35_Paper.pdf)
 
 ### Blogs
 - [Google DeepMind](https://deepmind.com/blog)
