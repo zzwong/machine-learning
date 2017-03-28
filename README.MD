@@ -23,6 +23,7 @@ Resources
 - [Mining of Massive Datasets](http://www.mmds.org/) by Jure Leskovec, Anand Rajaraman, Jeff Ullman from Stanford University [pdf](http://infolab.stanford.edu/~ullman/mmds/book.pdf)
 
 ### Papers
+- [Most cited deep learning papers - github repo](https://github.com/terryum/awesome-deep-learning-papers)
 - [Learning Content Similarity for Music
 Recommendation](https://bmcfee.github.io/papers/simopt.pdfi)
 - [Deep content-based music recommendation](http://papers.nips.cc/paper/5004-deep-content-based-music-recommendation.pdf)
