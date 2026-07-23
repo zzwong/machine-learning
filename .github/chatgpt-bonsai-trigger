@@ -2,4 +2,4 @@ download and package public Bonsai 8B runtime
 retry with current llama.cpp tarball
 split verified artifact for sub-512 MiB transport
 fetch official benchmark datasets for local evaluation
-run benchmark data transfer
+run benchmark data transfer 2026-07-23T22:32Z
