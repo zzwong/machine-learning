@@ -1,0 +1,66 @@
+name: Bonsai Benchmark Data
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: write
+
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Download official benchmark data
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p payload/gsm8k payload/humaneval payload/arc payload/wikitext
+
+          curl --location --fail --retry 5 --retry-all-errors \
+            --output payload/gsm8k/test.jsonl \
+            https://raw.githubusercontent.com/openai/grade-school-math/master/grade_school_math/data/test.jsonl
+
+          curl --location --fail --retry 5 --retry-all-errors \
+            --output payload/humaneval/HumanEval.jsonl.gz \
+            https://raw.githubusercontent.com/openai/human-eval/master/data/HumanEval.jsonl.gz
+
+          curl --location --fail --retry 5 --retry-all-errors \
+            --get \
+            --data-urlencode 'dataset=allenai/ai2_arc' \
+            --data-urlencode 'config=ARC-Challenge' \
+            --data-urlencode 'split=test' \
+            --data-urlencode 'offset=0' \
+            --data-urlencode 'length=100' \
+            --output payload/arc/test-100.json \
+            https://datasets-server.huggingface.co/rows
+
+          curl --location --fail --retry 5 --retry-all-errors \
+            --output payload/wikitext/test.txt \
+            https://raw.githubusercontent.com/pytorch/examples/main/word_language_model/data/wikitext-2/test.txt
+
+          jq -e '.rows | length == 100' payload/arc/test-100.json >/dev/null
+          find payload -type f -print0 | sort -z | xargs -0 sha256sum > payload/SHA256SUMS
+          find payload -type f -printf '%p %s bytes\n' | sort
+
+      - name: Upload benchmark data
+        uses: actions/upload-artifact@v4
+        with:
+          name: bonsai-benchmark-data
+          path: payload
+          retention-days: 1
+          compression-level: 6
+          if-no-files-found: error
+
+      - name: Remove temporary branches
+        if: always()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          head_ref="$(jq -r '.pull_request.head.ref' "$GITHUB_EVENT_PATH")"
+          base_ref="$(jq -r '.pull_request.base.ref' "$GITHUB_EVENT_PATH")"
+          gh api --method DELETE "repos/${GITHUB_REPOSITORY}/git/refs/heads/${head_ref}" || true
+          gh api --method DELETE "repos/${GITHUB_REPOSITORY}/git/refs/heads/${base_ref}" || true
