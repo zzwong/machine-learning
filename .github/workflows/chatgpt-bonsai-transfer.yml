@@ -1,0 +1,55 @@
+name: ChatGPT Bonsai Transfer
+
+on:
+  pull_request:
+    branches:
+      - chatgpt-bonsai-transfer-20260723
+
+permissions:
+  contents: read
+
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Download Bonsai 8B Q1_0
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p payload
+          curl --location --fail --retry 5 --retry-all-errors \
+            --output payload/Bonsai-8B.gguf \
+            'https://huggingface.co/prism-ml/Bonsai-8B-gguf/resolve/main/Bonsai-8B.gguf?download=true'
+          echo '284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54  payload/Bonsai-8B.gguf' | sha256sum --check
+          ls -lh payload/Bonsai-8B.gguf
+
+      - name: Download current llama.cpp Ubuntu x64 binaries
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          release_json="$(curl --fail --silent --show-error --location \
+            -H 'Accept: application/vnd.github+json' \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            https://api.github.com/repos/ggml-org/llama.cpp/releases/latest)"
+          asset_url="$(jq -r '.assets[] | select(.name | test("bin-ubuntu-x64\\.zip$")) | .browser_download_url' <<<"${release_json}" | head -n 1)"
+          test -n "${asset_url}" && test "${asset_url}" != null
+          curl --location --fail --retry 5 --retry-all-errors --output /tmp/llama.zip "${asset_url}"
+          mkdir -p payload/llama
+          unzip -q /tmp/llama.zip -d payload/llama
+          llama_cli="$(find payload/llama -type f -name llama-cli -print -quit)"
+          test -n "${llama_cli}"
+          chmod +x "${llama_cli}"
+          "${llama_cli}" --version
+          find payload/llama -maxdepth 3 -type f -printf '%P\n' | sort | head -100
+
+      - name: Upload runtime bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: bonsai-8b-runtime
+          path: payload
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
